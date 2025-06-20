@@ -1,28 +1,33 @@
+document.getElementById('file-input').addEventListener('change', function () {
+  const resultBox = document.getElementById('result-container');
+  const top5Box = document.getElementById('top5-container');
+  const status = document.getElementById('status');
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 模擬資料 - 真實應由圖片解析或 API 提供
-  const matches = [
-    { teamA: "勇士", teamB: "湖人", bestPick: "勇士", winRate: 88, odds: 1.95 },
-    { teamA: "塞爾提克", teamB: "熱火", bestPick: "塞爾提克", winRate: 85, odds: 1.90 },
-    { teamA: "太陽", teamB: "公鹿", bestPick: "太陽", winRate: 82, odds: 1.88 },
-    { teamA: "快艇", teamB: "拓荒者", bestPick: "快艇", winRate: 80, odds: 2.00 },
-    { teamA: "國王", teamB: "灰熊", bestPick: "國王", winRate: 78, odds: 1.92 },
-    { teamA: "火箭", teamB: "雷霆", bestPick: "雷霆", winRate: 75, odds: 2.05 }
-  ];
+  status.innerText = "📸 圖片已上傳，正在分析中…";
 
-  renderTop5(matches);
+  setTimeout(() => {
+    // 模擬分析邏輯
+    const highest = "球隊 A";
+    const winRate = "88%";
+    const suggestBet = "A 讓分 –5.5（賠率 1.95）";
+
+    status.innerHTML = `
+      🏆 勝率最高：${highest}（${winRate}）<br>
+      💰 建議投注：${suggestBet} <br>
+      🔥 即時 Top5 賽事如下：
+    `;
+
+    const top5 = [
+      { team: "勇士 vs 湖人", win: "82%", bet: "湖人 +4.5" },
+      { team: "太陽 vs 國王", win: "79%", bet: "太陽 -2.5" },
+      { team: "灰狼 vs 掘金", win: "76%", bet: "掘金 -3.5" },
+      { team: "公鹿 vs 熱火", win: "74%", bet: "公鹿 -1.5" },
+      { team: "老鷹 vs 公牛", win: "72%", bet: "老鷹 +2.5" },
+    ];
+
+    top5Box.innerHTML = top5.map(match =>
+      `<p>✅ ${match.team}｜勝率 ${match.win}｜建議投注：${match.bet}</p>`
+    ).join("");
+
+  }, 1500);
 });
-
-function renderTop5(matches) {
-  const topMatches = matches
-    .sort((a, b) => b.winRate - a.winRate)
-    .slice(0, 5);
-
-  let html = "<ol>";
-  topMatches.forEach(match => {
-    html += `<li>${match.teamA} vs ${match.teamB} - 勝率最高：${match.bestPick} (${match.winRate}%)，賠率 ${match.odds}</li>`;
-  });
-  html += "</ol>";
-
-  document.getElementById("top5-container").innerHTML = html;
-}

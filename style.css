@@ -1,0 +1,17 @@
+
+body {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    padding: 30px;
+    text-align: center;
+    background: #f9f9f9;
+}
+h1 {
+    color: #f60;
+}
+#resultBox {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
